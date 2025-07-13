@@ -3,7 +3,7 @@
         "syncType": "LINE_SYNCED",
         "lines": [
             {
-                "   ": "720",
+                "startTimeMs": "720",
                 "words": "(Yeah, yeah, yeah, yeah)",
                 "syllables": [],
                 "endTimeMs": "0"

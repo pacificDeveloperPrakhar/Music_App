@@ -22,11 +22,6 @@ modification of my own
 #### different color pallete for categories of song and playlist
 
 
+# Implementaion of the lyrics box
 
-## chess board to vector representation 
-
-## Demo
-
-Insert gif or link to demo
-
-![Chess Board Mapping](assets/image.png)
+![lyrics box implement overview](./public/lyrics_implement.png)  
