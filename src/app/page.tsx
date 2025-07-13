@@ -58,7 +58,7 @@ useEffect(()=>{
         console.log(frequencyData); // logs array of frequency data
         requestAnimationFrame(logFrequencies);
       };
-    
+      
       playBuffer.start(ctx.current.currentTime)
       logFrequencies();
       }}>play song</button>
