@@ -1,7 +1,7 @@
 "use client";
 import { NextPage } from 'next';
 import { useRef, useEffect, useState } from "react";
-
+import AudioPlayBack from "../components/audio_playback"
 interface Props {}
 
 const Playbox: NextPage<Props> = ({}) => {
@@ -55,6 +55,7 @@ const Playbox: NextPage<Props> = ({}) => {
       >
         volume {`${volume}`}
       </button>
+      <AudioPlayBack src={"./audios/master.m3u8"}/>
     </div>
   );
 };
