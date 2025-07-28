@@ -1,9 +1,12 @@
 import dotenv from "dotenv";
 import { createServer ,type Server} from "http";
 import express,{type Request,type Response,type NextFunction} from "express";
+// Make sure to install the 'pg' package 
+dotenv.config({ path: "../.env" });
+import {db}  from "./db/connection"
+
 
 // Load environment variables from the .env file
-dotenv.config({ path: "../.env" });
 
 const app = express();
 
