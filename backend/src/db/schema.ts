@@ -1,10 +1,11 @@
 // this will be used to generate the random uuid
-import {sql} from "drizzle-orm"
-
+import {sql,} from "drizzle-orm"
+import {createInsertSchema}  from "drizzle-zod"
 import { PgTable,pgEnum, pgTable, text,varchar,numeric,boolean,timestamp,jsonb,integer } from "drizzle-orm/pg-core"
+import {z} from "zod";
 // we will define the color pallete theme 
 const color_theme=pgEnum("theme",['#ffb347','#ffcc33','#43cea2','#FFA17F','#0b8793'])
-const audio_type=pgEnum("audio_type",["podcast","song"])
+export const audio_type=pgEnum("audio_type",["podcast","song"])
 // this is the audio schema which i did use so to mimic the spotify api as seen with bit of my modification
 
 export const audio = pgTable("audio", {
@@ -74,7 +75,7 @@ export const playlist = pgTable("playlist", {
   owner_id: text("owner_id").notNull(), // should reference user table ideally
   collaborative: boolean("collaborative").default(false),
   image: text("image"),
-  createdAt: timestamp("created_at").defaultNow(),
+  created_at: timestamp("created_at").defaultNow(),
 });
 
 const playlist_songs= pgTable("playlist_songs", {
@@ -116,3 +117,97 @@ export const userFollowingPlaylists = pgTable("user_following_playlists", {
   playlistId: varchar("playlist_id").notNull().references(() => playlist.id),
   followedAt: timestamp("followed_at").default(sql`CURRENT_TIMESTAMP`),
 });
+// creating the type export for the select 
+export type user=typeof user.$inferSelect
+export type artist = typeof artist.$inferSelect;
+export type album = typeof album.$inferSelect;
+export type playlist = typeof playlist.$inferSelect;
+export type audio = typeof audio.$inferSelect;
+// creating the insert schemas
+export const insertUserSchema = createInsertSchema(user).omit({
+  id: true,
+});
+
+export const insertArtistSchema = createInsertSchema(artist).omit({
+  id: true,
+});
+
+export const insertAlbumSchema = createInsertSchema(album).omit({
+  id: true,
+});
+
+export const insertSongSchema = createInsertSchema(audio).omit({
+  id: true,
+});
+
+export const insertPlaylistSchema = createInsertSchema(playlist).omit({
+  id: true,
+  created_at: true,
+});
+
+export const insertPlaylistSongSchema = createInsertSchema(playlist_songs).omit({
+  id: true,
+  addedAt: true,
+});
+
+export const insertUserLikedSongSchema = createInsertSchema(liked_audio).omit({
+  id: true,
+  liked_at: true,
+});
+
+export const insertUserRecentlyPlayedSchema = createInsertSchema(userRecentlyPlayed).omit({
+  id: true,
+  playedAt: true,
+});
+
+export const insertUserFollowingArtistSchema = createInsertSchema(userFollowingArtists).omit({
+  id: true,
+  followedAt: true,
+});
+
+export const insertUserFollowingPlaylistSchema = createInsertSchema(userFollowingPlaylists).omit({
+  id: true,
+  followedAt: true,
+});
+
+// types for the insert data
+
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type InsertArtist = z.infer<typeof insertArtistSchema>;
+export type InsertAlbum = z.infer<typeof insertAlbumSchema>;
+export type InsertSong = z.infer<typeof insertSongSchema>;
+export type InsertPlaylist = z.infer<typeof insertPlaylistSchema>;
+export type InsertPlaylistSong = z.infer<typeof insertPlaylistSongSchema>;
+export type InsertUserLikedSong = z.infer<typeof insertUserLikedSongSchema>;
+export type InsertUserRecentlyPlayed = z.infer<typeof insertUserRecentlyPlayedSchema>;
+export type InsertUserFollowingArtist = z.infer<typeof insertUserFollowingArtistSchema>;
+export type InsertUserFollowingPlaylist = z.infer<typeof insertUserFollowingPlaylistSchema>;
+
+// Extended types for API responses (with joined data)
+export type SongWithArtistAndAlbum = audio & {
+  artist: artist;
+  album?: album;
+};
+
+export type PlaylistWithOwner = playlist & {
+  owner: user;
+};
+
+export type PlaylistWithSongs = playlist & {
+  owner: user;
+  songs: SongWithArtistAndAlbum[];
+};
+
+export type AlbumWithArtist = album & {
+  artist: artist;
+};
+
+export type AlbumWithSongs = album & {
+  artist: artist;
+  songs: SongWithArtistAndAlbum[];
+};
+
+export type ArtistWithStats = artist & {
+  albumCount: number;
+  songCount: number;
+};
