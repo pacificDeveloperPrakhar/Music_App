@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { createServer ,type Server} from "http";
-import express,{type Request,type Response,type NextFunction} from "express";
+import Vibrant from "node-vibrant"
+import {app} from "./App"
 // Make sure to install the 'pg' package 
 dotenv.config({ path: "../.env" });
 import {db}  from "./db/connection"
@@ -8,7 +9,6 @@ import {db}  from "./db/connection"
 
 // Load environment variables from the .env file
 
-const app = express();
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const HOST = process.env.HOST || "localhost";
