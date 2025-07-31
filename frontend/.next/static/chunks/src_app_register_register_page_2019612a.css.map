@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/admin/Desktop/music_app/Music_App/frontend/src/app/register/register_page.css"],"sourcesContent":[".register_background{\r\nbackground: linear-gradient(-53deg,#26013d,#471228);\r\n}"],"names":[],"mappings":"AAAA","debugId":null}}]
+}

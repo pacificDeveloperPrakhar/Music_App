@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 import artistRoutes from "./routes/artistRoutes";
 import userRoutes from "./routes/userRoutes";
 import error_handler from "./controllers/error_handler";
+import { googleStartegyController } from "./controllers/userController";
 
 dotenv.config();
 
@@ -74,13 +75,7 @@ passport.use(new GoogleStrategy({
     "https://www.googleapis.com/auth/user.phonenumbers.read",
     "https://www.googleapis.com/auth/user.addresses.read"
   ]
-}, async (accessToken, refreshToken, profile, done) => {
-  console.log("sequence_count: strategy callback");
-  console.log(accessToken)
-  console.log(refreshToken)
-  console.log(profile)
-  return done(null,{})
-}));
+}, googleStartegyController));
 
 // Routes
 app.get("/extract", async function (req: Request, res: Response, next: NextFunction) {
@@ -101,29 +96,10 @@ app.use("/login", (req: Request, res: Response) => {
   res.sendFile(filePath);
 });
 
-console.log(sequence_count++, "Mounting /authenticate/google route");
-app.get("/authenticate/google", (req,res,next)=>{
-    console.log("3")
-    next()
-},passport.authenticate("google", {
-  scope: ["email", "profile"],
-}));
 
-console.log(sequence_count++, "Mounting /users/redirect route");
-app.get("/users/redirect",
-  (req,res,next)=>{
-    console.log(req.params)
-    console.log("2")
-    next()
-},
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-    successRedirect: "/dashboard",
-  })
-);
+
 
 // Sample protected route
-console.log(sequence_count++, "Mounting /dashboard route");
 app.get("/dashboard", (req:Request, res:Response) => {
     console.log("made it to dashboard")
   if (!req.isAuthenticated()) {
@@ -136,7 +112,7 @@ app.get("/dashboard", (req:Request, res:Response) => {
 
 // Use other routes
 console.log(sequence_count++, "Mounting /user and /artist routes");
-app.use("/user", userRoutes);
+app.use("/users", userRoutes);
 app.use("/artist", artistRoutes);
 
 // Global error handler
