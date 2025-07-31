@@ -1,3 +1,31 @@
 .register_background{
 background: linear-gradient(-53deg,#26013d,#471228);
 }
+.register_background .main{
+    position: absolute;
+    inset: 30 190 ;
+    border-radius: 2%;
+    overflow: hidden;
+    background-color: #11081d;
+    display: flex;
+}
+.register_background .demo_section{
+    flex: 2;
+    border-radius: 1.5%;
+    background: linear-gradient(160deg, #ff005e, #ff2e87);
+    overflow: hidden;
+
+}
+.register_background .register_section{
+    flex:3;
+    background-color: #11081d;
+
+}
+.illustrations_circle  {
+    transform: translate(214,390);
+    ;
+}
+.illustrations_circle_1  {
+    transform: translate(-40,-300);
+    ;
+}

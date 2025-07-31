@@ -3,5 +3,34 @@
   background: linear-gradient(-53deg, #26013d, #471228);
 }
 
+.register_background .main {
+  background-color: #11081d;
+  border-radius: 2%;
+  display: flex;
+  position: absolute;
+  inset: 30px 190px;
+  overflow: hidden;
+}
+
+.register_background .demo_section {
+  background: linear-gradient(160deg, #ff005e, #ff2e87);
+  border-radius: 1.5%;
+  flex: 2;
+  overflow: hidden;
+}
+
+.register_background .register_section {
+  background-color: #11081d;
+  flex: 3;
+}
+
+.illustrations_circle {
+  transform: translate(214px, 390px);
+}
+
+.illustrations_circle_1 {
+  transform: translate(-40px, -300px);
+}
+
 
 /*# sourceMappingURL=src_app_register_register_page_2019612a.css.map*/
