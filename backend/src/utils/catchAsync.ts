@@ -11,8 +11,9 @@ export default function asyncHandler(
     try {
       await func(req, res, next);
     } catch (err) {
+      console.log(err)
       const error = err as CustomError;
-
+    
     // by default the status code do be adjusted to 500
       error.statusCode = error.statusCode || 500;
       if (!error.message) {

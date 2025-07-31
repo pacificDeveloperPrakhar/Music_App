@@ -11,7 +11,7 @@ import {db}  from "./db/connection"
 
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
-const HOST = process.env.HOST || "localhost";
+const HOST = process.env.HOST || "127.0.0.1";
 
 // Create the server
 const server:Server = createServer(app);

@@ -10,11 +10,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "connect-pg-simple": "^10.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.3",
     "drizzle-zod": "^0.8.2",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "googleapis": "^154.1.0",
     "node-vibrant": "^4.0.3",
+    "passport-google-oauth20": "^2.0.0",
     "pg": "^8.16.3",
     "zod": "^3.25.1"
   },

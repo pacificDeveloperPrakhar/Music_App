@@ -1,4 +1,5 @@
 CREATE TYPE "public"."audio_type" AS ENUM('podcast', 'song');--> statement-breakpoint
+CREATE TYPE "public"."theme" AS ENUM('#ffb347', '#ffcc33', '#43cea2', '#FFA17F', '#0b8793');--> statement-breakpoint
 CREATE TABLE "album" (
 	"id" text PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" varchar(255) NOT NULL,
@@ -14,10 +15,13 @@ CREATE TABLE "artist" (
 	"id" text PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"popularity" numeric DEFAULT '0',
+	"user_id" varchar,
 	"followers" numeric DEFAULT '0',
 	"genres" text[] DEFAULT '{}'::text[],
 	"image" text,
-	"created_at" timestamp DEFAULT now()
+	"theme" "theme" DEFAULT '#FFA17F',
+	"created_at" timestamp DEFAULT now(),
+	CONSTRAINT "artist_name_unique" UNIQUE("name")
 );
 --> statement-breakpoint
 CREATE TABLE "audio" (
@@ -90,6 +94,7 @@ CREATE TABLE "user_recently_played" (
 );
 --> statement-breakpoint
 ALTER TABLE "album" ADD CONSTRAINT "album_artist_id_artist_id_fk" FOREIGN KEY ("artist_id") REFERENCES "public"."artist"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "artist" ADD CONSTRAINT "artist_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "user_following_artists" ADD CONSTRAINT "user_following_artists_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "user_following_artists" ADD CONSTRAINT "user_following_artists_artist_id_artist_id_fk" FOREIGN KEY ("artist_id") REFERENCES "public"."artist"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "user_following_playlists" ADD CONSTRAINT "user_following_playlists_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint

@@ -4,7 +4,8 @@ import {createInsertSchema}  from "drizzle-zod"
 import { PgTable,pgEnum, pgTable, text,varchar,numeric,boolean,timestamp,jsonb,integer } from "drizzle-orm/pg-core"
 import {z} from "zod";
 // we will define the color pallete theme 
-const color_theme=pgEnum("theme",['#ffb347','#ffcc33','#43cea2','#FFA17F','#0b8793'])
+export const color_theme=pgEnum("theme",['#ffb347','#ffcc33','#43cea2','#FFA17F','#0b8793'])
+export const color_theme_array=['#ffb347','#ffcc33','#43cea2','#FFA17F','#0b8793']
 export const audio_type=pgEnum("audio_type",["podcast","song"])
 // this is the audio schema which i did use so to mimic the spotify api as seen with bit of my modification
 
@@ -48,11 +49,14 @@ export const user = pgTable("user", {
 // here is the artist schema
 export const artist = pgTable("artist", {
   id: text("id").primaryKey().notNull().default(sql`gen_random_uuid()`),
-  name: varchar("name", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull().unique(),
   popularity: numeric("popularity").default("0"), // 0–100
+  userId:varchar("user_id").references(()=>user.id),
   followers: numeric("followers").default("0"),
   genres: text("genres").array().default(sql`'{}'::text[]`),
-  image: text("image"),
+  image: text("image").default(""),
+  theme:color_theme("theme").default("#FFA17F"),
+  updatedAt:timestamp("updated_at").defaultNow(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 // here is the album schema
@@ -75,6 +79,7 @@ export const playlist = pgTable("playlist", {
   owner_id: text("owner_id").notNull(), // should reference user table ideally
   collaborative: boolean("collaborative").default(false),
   image: text("image"),
+  theme:varchar("theme").default(""),
   created_at: timestamp("created_at").defaultNow(),
 });
 
@@ -169,6 +174,8 @@ export const insertUserFollowingPlaylistSchema = createInsertSchema(userFollowin
   id: true,
   followedAt: true,
 });
+//updating schema definition for zod
+
 
 // types for the insert data
 
