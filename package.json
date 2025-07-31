@@ -1,7 +1,10 @@
 {
   "dependencies": {
+    "connect-pg-simple": "^10.0.0",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.3",
+    "passport": "^0.7.0",
+    "passport-google-oidc": "^0.1.0",
     "postgres": "^3.4.7"
   },
   "devDependencies": {
