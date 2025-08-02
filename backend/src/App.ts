@@ -1,9 +1,9 @@
 import { google } from "googleapis";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import express, { type Request, type Response, type NextFunction } from "express";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
+import cors from "cors"
 import { Vibrant } from "node-vibrant/node";
 import pg from "pg";
 import path from "path";
@@ -18,7 +18,14 @@ dotenv.config();
 let sequence_count = 1;
 
 export const app = express();
-
+// setting up the cors
+app.use(cors({
+    origin: ['http://127.0.0.1:3000','http://127.0.0.1:1234'],  // i have changed it to allow it to accept request from one specific source only
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  
+    allowedHeaders: ['Content-Type', 'Authorization'],  
+    credentials: true ,
+    optionsSuccessStatus:200
+  }));
 // PostgreSQL session store
 const PgSession = connectPgSimple(session);
 const pgPool = new pg.Pool({
@@ -63,20 +70,6 @@ passport.deserializeUser((user: any, done) => {
   done(null, user);
 });
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID!,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-  callbackURL: process.env.GOOGLE_CALLBACK_URL!,
-  scope: [
-    "profile",
-    "email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/user.phonenumbers.read",
-    "https://www.googleapis.com/auth/user.addresses.read"
-  ]
-}, googleStartegyController));
-
 // Routes
 app.get("/extract", async function (req: Request, res: Response, next: NextFunction) {
   try {
@@ -110,11 +103,9 @@ app.get("/dashboard", (req:Request, res:Response) => {
   res.send(`<h1>Welcome ${req.user?.name}</h1><img src="${(req.user as any).photo}" width="100" />`);
 });
 
-// Use other routes
-console.log(sequence_count++, "Mounting /user and /artist routes");
 app.use("/users", userRoutes);
 app.use("/artist", artistRoutes);
 
-// Global error handler
-console.log(sequence_count++, "Mounting error handler");
+
+
 app.use(error_handler);

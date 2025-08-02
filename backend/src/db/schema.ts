@@ -32,7 +32,7 @@ export const audio = pgTable("audio", {
 
 export const user = pgTable("user", {
   id: text("id").primaryKey().notNull().default(sql`gen_random_uuid()`), // Internal DB ID
-  spotify_id: text("spotify_id").notNull().unique(), // Spotify user ID
+  // spotify_id: text("spotify_id").notNull().unique(), // Spotify user ID
   display_name: varchar("display_name", { length: 255 }).notNull(),    
   email: varchar("email", { length: 255 }).notNull().unique(),
   country: varchar("country", { length: 2 }), // e.g., "IN", "US"

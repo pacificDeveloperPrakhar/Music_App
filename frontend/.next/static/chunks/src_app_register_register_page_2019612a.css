@@ -10,6 +10,7 @@
   position: absolute;
   inset: 30px 190px;
   overflow: hidden;
+  box-shadow: 0 2px 41px #ff2e8740;
 }
 
 .register_background .demo_section {
@@ -30,6 +31,51 @@
 
 .illustrations_circle_1 {
   transform: translate(-40px, -300px);
+}
+
+.playbox {
+  padding-left: .5rem;
+  background-color: #11081d;
+  border-radius: 1rem;
+  width: 26rem;
+  height: 9rem;
+  padding-block: .5rem;
+  display: flex;
+  position: absolute;
+  top: 8rem;
+  left: 5rem;
+}
+
+.playbox img {
+  border-radius: .7rem;
+  flex: 2;
+  width: 35%;
+}
+
+.loader {
+  margin-inline: 1rem;
+}
+
+.register_section_heading {
+  text-align: center;
+  -webkit-text-fill-color: transparent;
+  color: #0000;
+  background-color: #f0f8ff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: sans-serif;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.glow-button {
+  transition: box-shadow .3s ease #ff005e;
+  border-radius: 2rem;
+  box-shadow: 0 0 #ff005e;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 16px #ff2e87;
 }
 
 

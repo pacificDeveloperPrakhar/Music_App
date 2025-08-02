@@ -4,6 +4,9 @@ background: linear-gradient(-53deg,#26013d,#471228);
 .register_background .main{
     position: absolute;
     inset: 30 190 ;
+    box-shadow: 0px 2px 41px rgba(255, 46, 135, 0.25);
+
+
     border-radius: 2%;
     overflow: hidden;
     background-color: #11081d;
@@ -28,4 +31,50 @@ background: linear-gradient(-53deg,#26013d,#471228);
 .illustrations_circle_1  {
     transform: translate(-40,-300);
     ;
+}
+.playbox {
+    width: 26rem;       
+    height: 9rem;      
+    left:5rem;
+    top: 8rem;
+    position: absolute;
+    padding-left: 0.5rem;
+    padding-block: 0.5rem;
+    background-color: #11081d;
+    border-radius: 1rem; 
+    
+    display: flex;
+}
+.playbox img{
+    border-radius: 0.7rem;
+    width: 35%;
+    flex: 2;
+}
+.loader{
+    margin-inline: 1rem;
+}
+.register_section_heading {
+    /* background: linear-gradient(90deg, #ff005e, #ff2e87); */
+    background-color: aliceblue;
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 500;
+    font-family: sans-serif;
+    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+    color: transparent;
+}
+
+.glow-button {
+
+  border-radius: 2rem;
+  box-shadow: 0 0 0px #ff005e; /* blue glow */
+  transition: box-shadow 0.3s ease #ff005e;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 16px #ff2e87;
 }
