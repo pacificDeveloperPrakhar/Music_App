@@ -3,10 +3,12 @@ import {sql,} from "drizzle-orm"
 import {createInsertSchema}  from "drizzle-zod"
 import { PgTable,pgEnum, pgTable, text,varchar,numeric,boolean,timestamp,jsonb,integer } from "drizzle-orm/pg-core"
 import {z} from "zod";
+import { permission } from "process";
 // we will define the color pallete theme 
 export const color_theme=pgEnum("theme",['#ffb347','#ffcc33','#43cea2','#FFA17F','#0b8793'])
 export const color_theme_array=['#ffb347','#ffcc33','#43cea2','#FFA17F','#0b8793']
 export const audio_type=pgEnum("audio_type",["podcast","song"])
+export const permissons=pgEnum("permissons",["admin","user"])
 // this is the audio schema which i did use so to mimic the spotify api as seen with bit of my modification
 
 export const audio = pgTable("audio", {
@@ -42,6 +44,7 @@ export const user = pgTable("user", {
   external_urls: jsonb("external_urls").default(sql`'{}'::jsonb`), 
   href: text("href"),
   uri: text("uri"),
+  permission:permissons("permisson").default("user"),
   is_verified: boolean("is_verified").default(false),
   created_at: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updated_at: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),

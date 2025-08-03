@@ -1,5 +1,7 @@
 import catchAsync from "../utils/catchAsync";
 import {user,type user as user_type} from "../db/schema"
+import {type Request,type Response,type NextFunction} from "express";
+import jwt from "jsonwebtoken"
 import {eq} from "drizzle-orm"
 import { db } from "../db/connection";
 export const googleStrategyController = async function (
@@ -82,3 +84,15 @@ export const googleStrategyController = async function (
 //     email_verified: true
 //   }
 // }
+export const issueToken =catchAsync(async function(req:Request,res:Response,next:NextFunction){
+  const {email,id}=req.user
+  const token=jwt.sign({email,id},process.env.private_key,{expiresIn:'1h'}) 
+  res.setHeader("Authorization",`Bearer ${token}`)
+  res.cookie('jwt',token,{
+    httpOnly: false, 
+      secure: false, 
+      sameSite: 'strict', 
+      maxAge: 60 * 60 * 1000, 
+  })
+  res.redirect('/dashboard')
+})

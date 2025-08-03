@@ -2,7 +2,7 @@ import express from "express"
 import passport from "passport";
 import dotenv from "dotenv";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { googleStrategyController } from "../controllers/userController";
+import { googleStrategyController,issueToken } from "../controllers/userController";
 dotenv.config();
 const routes=express.Router()
 routes.route("/authenticate_with_google").get(passport.authenticate("google",{
@@ -26,7 +26,8 @@ passport.use(new GoogleStrategy({
 routes.route("/redirect").get(
   passport.authenticate("google", {
     failureRedirect: "/login",
-    successRedirect: "/dashboard",
+    successRedirect: "/user/success",
   })
 );
+routes.route("/success").get(issueToken)
 export default routes
