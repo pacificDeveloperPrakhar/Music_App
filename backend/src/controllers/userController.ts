@@ -4,6 +4,7 @@ import {type Request,type Response,type NextFunction} from "express";
 import jwt from "jsonwebtoken"
 import {eq} from "drizzle-orm"
 import { db } from "../db/connection";
+import {client} from "../db/redisConnection"
 export const googleStrategyController = async function (
   accessToken: string,
   refreshToken: string | undefined,
@@ -32,7 +33,11 @@ export const googleStrategyController = async function (
       .insert(user)
       .values(credentials)
       .returning();
-
+    client.lPush(process.env.file_management_queue,`{
+  "id": "${newUser.id}",
+  "schemaType": "users",
+  "url": "${newUser.profile_images[0]}"
+}`)
     return done(null, newUser); // this becomes req.user
   }
 
@@ -51,7 +56,7 @@ export const googleStrategyController = async function (
     .select()
     .from(user)
     .where(eq(user.email, credentials.email));
-
+  client.lPush(process.env.file_management_queue,`{"id":"${updatedUser.id}","schemaType":"users","url":"${updatedUser.profile_images[0]}"}`)
   return done(null, updatedUser); // this becomes req.user
 };
 // {

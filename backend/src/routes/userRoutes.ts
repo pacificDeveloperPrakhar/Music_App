@@ -26,7 +26,7 @@ passport.use(new GoogleStrategy({
 routes.route("/redirect").get(
   passport.authenticate("google", {
     failureRedirect: "/login",
-    successRedirect: "/user/success",
+    successRedirect: "/users/success",
   })
 );
 routes.route("/success").get(issueToken)

@@ -9,6 +9,7 @@ import pg from "pg";
 import path from "path";
 import dotenv from "dotenv";
 import artistRoutes from "./routes/artistRoutes";
+import {client} from "./db/redisConnection"
 import userRoutes from "./routes/userRoutes";
 import error_handler from "./controllers/error_handler";
 import { googleStartegyController } from "./controllers/userController";
@@ -105,7 +106,7 @@ app.get("/dashboard", (req:Request, res:Response) => {
 
 app.use("/users", userRoutes);
 app.use("/artist", artistRoutes);
-
+app.use("/content",express.static("../public"))
 
 
 app.use(error_handler);
