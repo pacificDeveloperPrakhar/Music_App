@@ -1,0 +1,48 @@
+/* [project]/src/app/style.css [app-client] (css) */
+.main_portion {
+  background-color: #000;
+  display: flex;
+}
+
+.main_portion div {
+  border-radius: .2rem;
+  margin: .2rem;
+}
+
+.playlist_panel div h1 {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.playlist_panel div h1 .list_collapse {
+  opacity: 0;
+  width: 2rem;
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1), opacity .3s cubic-bezier(.4, 0, .2, 1);
+  transform: translateX(0);
+}
+
+.playlist_panel div h1 span {
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.playlist_panel:hover div h1 .list_collapse {
+  opacity: 1;
+  margin-right: 0;
+  transform: translateX(0);
+}
+
+.playlist_panel:hover div h1 span {
+  transform: translateX(1rem);
+}
+
+
+/* [project]/src/app/modals/create_playlist_modal.css [app-client] (css) */
+.create_playlist_modal {
+  -webkit-backdrop-filter: blur(12px);
+  background-color: #1e1e1e99;
+  display: none;
+}
+
+
+/*# sourceMappingURL=src_app_37811654._.css.map*/

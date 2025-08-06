@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 import { client } from "../db/redisConnection"
 import { db } from "../db/connection"
-import { user, type user as user_type } from "../db/schema"
+import { album, artist, audio, playlist, user, type user as user_type } from "../db/schema"
 import { pipeline, Writable, Readable } from "stream"
 import {eq} from "drizzle-orm"
 import { get as httpsGet } from "https"
@@ -59,7 +59,27 @@ async function main() {
             console.log(err)
         })
         // now update the url from the use data table
-        await db.update(user).set({profile_images:[`http://127.0.0.1:3000/content/${task.schemaType}/${task.id}/${id}${extname}`]}).where(eq(user.id,task.id))
+        switch(task.schemaType)
+        {
+        case "users":
+            await db.update(user).set({profile_images:[`http://127.0.0.1:3000/content/${task.schemaType}/${task.id}/${id}${extname}`]}).where(eq(user.id,task.id))
+        break;
+            case "artists":
+        await db.update(artist).set({image:`http://127.0.0.1:3000/content/${task.schemaType}/${task.id}/${id}${extname}`}).where(eq(artist.id,task.id))
+        break;
+        case "audio":
+        await db.update(audio).set({preview:`http://127.0.0.1:3000/content/${task.schemaType}/${task.id}/${id}${extname}`}).where(eq(audio.id,task.id))
+        break;
+        case "album":
+            await db.update(album).set({image:`http://127.0.0.1:3000/content/${task.schemaType}/${task.id}/${id}${extname}`}).where(eq(album.id,task.id))
+            break;
+            case "playlist":
+            await db.update(playlist).set({image:`http://127.0.0.1:3000/content/${task.schemaType}/${task.id}/${id}${extname}`}).where(eq(playlist.id,task.id))
+            break;
+        default:
+         console.log("queue received unattachable data")
+        }
+
     }
 };
 main()

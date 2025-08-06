@@ -1,0 +1,24 @@
+/* [project]/src/app/components/custom_drop_down.css [app-client] (css) */
+.dropdown {
+  max-height: 20vh;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: none;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 8px;
+}
+
+.dropdown {
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 transparent;
+}
+
+/*# sourceMappingURL=src_app_components_custom_drop_down_css_f9ee138c._.single.css.map*/

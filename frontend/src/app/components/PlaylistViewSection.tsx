@@ -2,8 +2,8 @@ import React from 'react'
 import { AlignJustify } from 'lucide-react'
 export default function PlaylistViewSection() {
   return (
-    <section>
-<section className="px-4 py-2">
+    
+<section className="px-4 py-2 playlist_view">
   <div className="flex items-center justify-between gap-2">
     {/* Search Input */}
     <input
@@ -20,6 +20,6 @@ export default function PlaylistViewSection() {
   </div>
 </section>
 
-    </section>
+    
   )
 }

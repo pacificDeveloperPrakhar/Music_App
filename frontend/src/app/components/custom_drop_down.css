@@ -1,0 +1,23 @@
+.dropdown{
+    max-height: 20vh;
+}
+/* Apply this to your dropdown div or a shared class like .dropdown */
+.dropdown::-webkit-scrollbar {
+    width: 4px; /* Thin scrollbar */
+  }
+  
+  .dropdown::-webkit-scrollbar-track {
+    background: transparent; /* Invisible track */
+  }
+  
+  .dropdown::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* Dark gray thumb (e.g., Tailwind's gray-700) */
+    border-radius: 8px;
+  }
+  
+  /* Firefox support */
+  .dropdown {
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 transparent;
+  }
+  

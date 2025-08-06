@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/components/custom_drop_down.css"],"sourcesContent":[".dropdown{\n    max-height: 20vh;\n}\n/* Apply this to your dropdown div or a shared class like .dropdown */\n.dropdown::-webkit-scrollbar {\n    width: 4px; /* Thin scrollbar */\n  }\n  \n  .dropdown::-webkit-scrollbar-track {\n    background: transparent; /* Invisible track */\n  }\n  \n  .dropdown::-webkit-scrollbar-thumb {\n    background-color: #4b5563; /* Dark gray thumb (e.g., Tailwind's gray-700) */\n    border-radius: 8px;\n  }\n  \n  /* Firefox support */\n  .dropdown {\n    scrollbar-width: thin;\n    scrollbar-color: #4b5563 transparent;\n  }\n  "],"names":[],"mappings":"AAAA;;;;AAIA;;;;AAIE;;;;AAIA;;;;;AAMA"}}]
+}

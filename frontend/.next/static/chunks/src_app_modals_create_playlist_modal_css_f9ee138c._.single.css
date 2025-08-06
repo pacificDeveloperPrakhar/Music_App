@@ -1,0 +1,8 @@
+/* [project]/src/app/modals/create_playlist_modal.css [app-client] (css) */
+.create_playlist_modal {
+  -webkit-backdrop-filter: blur(12px);
+  background-color: #1e1e1e99;
+  display: none;
+}
+
+/*# sourceMappingURL=src_app_modals_create_playlist_modal_css_f9ee138c._.single.css.map*/

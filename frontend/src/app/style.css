@@ -6,3 +6,34 @@
     margin:0.2rem;
     border-radius: 0.2rem;
   }
+
+
+/* Initial state */
+.playlist_panel div h1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.playlist_panel div h1 .list_collapse {
+  opacity: 0;
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 2rem; /* fixed width for consistent layout shift */
+}
+
+/* Optional: prevent layout shift */
+.playlist_panel div h1 span {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* On hover */
+.playlist_panel:hover div h1 .list_collapse {
+  opacity: 1;
+  transform: translateX(0);
+  margin-right: 0;
+}
+
+.playlist_panel:hover div h1 span {
+  transform: translateX(1rem); /* makes space for the appearing icon */
+}

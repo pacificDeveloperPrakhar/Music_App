@@ -86,7 +86,7 @@ export const playlist = pgTable("playlist", {
   created_at: timestamp("created_at").defaultNow(),
 });
 
-const playlist_songs= pgTable("playlist_songs", {
+export const playlist_songs= pgTable("playlist_songs", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   playlistId: varchar("playlist_id").notNull().references(() => playlist.id),
   songId: varchar("song_id").notNull().references(() => audio.id),
@@ -95,7 +95,7 @@ const playlist_songs= pgTable("playlist_songs", {
   position: integer("position").notNull(), //now this field is to define the position of the audio in the playlist
 });
 // this audio contains the user and audio relation based on the like
-const liked_audio=pgTable("liked_audio",{
+export const liked_audio=pgTable("liked_audio",{
     id:text('id').primaryKey().default(sql`gen_random_uuid()`),
     song_id:varchar("song_id").notNull().references(()=>audio.id),
     likedBy:varchar("liked_by").notNull().references(()=>user.id),

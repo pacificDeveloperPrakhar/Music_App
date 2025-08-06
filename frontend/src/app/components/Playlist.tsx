@@ -1,24 +1,23 @@
 import React from 'react'
 import { ListCollapse ,Plus,Scaling} from 'lucide-react'
 import PlaylistViewSection from './PlaylistViewSection'
+import CreatePlaylist from "../modals/create_playlist"
+import AddSong from "../modals/add_new_song"
+import DropdownMenu from './dropdown'
 export default function Playlist() {
   return (
-    <section className="min-h-full flex-col  flex-1/4  bg-amber-600">
+    <section className="min-h-full flex-col  flex-1/4  bg-amber-600 playlist_panel">
 <div className="flex items-center justify-between px-4 py-2">
 <h1 className="flex items-center gap-2 font-extrabold text-lg text-gray-900">
-  <ListCollapse strokeWidth={2.5} className="w-5 h-5 text-gray-800" />
+  <ListCollapse strokeWidth={2.5} className="w-5 h-5 text-gray-800 list_collapse" />
   <span>Your Library</span>
 </h1>
 
   {/* artist and playlist tab */}
   {/* ================================================================================================================= */}
   <div className="flex items-center space-x-2">
-  <button
-    className="p-2 rounded-full hover:bg-gray-200 hover:scale-110 transition-transform duration-150 cursor-pointer"
-    aria-label="Add to Library"
-  >
-    <Plus strokeWidth={1.5} className="w-5 h-5 text-gray-700" />
-  </button>
+
+    <DropdownMenu/>
   <button
     className="p-2 rounded-full hover:bg-gray-200 hover:scale-110 transition-transform duration-150 cursor-pointer"
     aria-label="View Options"
@@ -41,6 +40,8 @@ export default function Playlist() {
 
   {/* now the playlist and artist preview section */}
   <PlaylistViewSection/>
+  <AddSong/>
+  <CreatePlaylist/>
    </section>
   )
 }

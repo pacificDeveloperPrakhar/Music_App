@@ -5,6 +5,7 @@ import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import cors from "cors"
 import { Vibrant } from "node-vibrant/node";
+import audioRoutes from "./routes/audioRoutes"
 import pg from "pg";
 import path from "path";
 import dotenv from "dotenv";
@@ -106,6 +107,7 @@ app.get("/dashboard", (req:Request, res:Response) => {
 
 app.use("/users", userRoutes);
 app.use("/artist", artistRoutes);
+app.use("/audio",audioRoutes)
 app.use("/content",express.static("../public"))
 
 
