@@ -1,0 +1,13 @@
+/* [project]/src/app/style.css [app-client] (css) */
+.main_portion {
+  background-color: #000;
+  display: flex;
+}
+
+.main_portion div {
+  border-radius: .2rem;
+  margin: .2rem;
+}
+
+
+/*# sourceMappingURL=src_app_style_7cfa6e81.css.map*/

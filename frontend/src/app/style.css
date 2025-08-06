@@ -1,0 +1,8 @@
+.main_portion{
+    display:flex;
+    background-color: black;
+  }
+  .main_portion div{
+    margin:0.2rem;
+    border-radius: 0.2rem;
+  }

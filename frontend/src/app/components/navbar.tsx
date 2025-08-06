@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 
 export default function Navbar() {
   return (
-    <nav className="bg-black border-b border-border px-4 py-3 flex items-center justify-between text-gray-300">
+    <nav className="bg-black border-b border-border px-4 py-3 flex items-center justify-between  text-gray-300">
       {/* Left side - Logo and Home */}
       <div className="flex items-center gap-4">
         {/* Spotify-like logo */}

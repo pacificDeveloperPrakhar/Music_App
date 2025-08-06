@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///home/prakhar/Desktop/prakhar/Music_App/frontend/src/app/style.css"],"sourcesContent":[".main_portion{\n    display:flex;\n    background-color: black;\n  }\n  .main_portion div{\n    margin:0.2rem;\n    border-radius: 0.2rem;\n  }"],"names":[],"mappings":"AAAA;;;;;AAIE","debugId":null}}]
+}
