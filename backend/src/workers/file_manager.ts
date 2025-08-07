@@ -17,7 +17,7 @@ import { table } from "console"
 dotenv.config({
     path: "./.env"
 })
-
+console.log(process.env)
 // create a pipe promise returning function converting the stream pipe from asynchronous callback to promise 
 const pipe = async (srcStream: Readable, destStream: Writable): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
@@ -32,6 +32,7 @@ async function main() {
         // this is the main portion of our code
         const { element } = await client.blPop(process.env.file_management_queue || "file_management_queue", 0);
         const task = JSON.parse(element)
+        console.log(task)
         //   now create the get method to pass the url and then download the file in stream
         const parsed = parse(task.url)
         const get = parsed.protocol === "https:" ? httpsGet : httpGet
