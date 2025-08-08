@@ -47,6 +47,6 @@ async function main()
   "${playlist_path}/output_%v.m3u8"
       `)
   console.log(output)
-  await db.update(audio).set({hls_bitrate_src:`${path.join(playlist_path,"master.m3u8")}`}).where(eq(audio.id,task.id))
+  await db.update(audio).set({hls_bitrate_src:`${path.join(playlist_path,task.id,"master.m3u8")}`}).where(eq(audio.id,task.id))
 }
 }

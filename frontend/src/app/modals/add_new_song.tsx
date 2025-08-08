@@ -3,6 +3,7 @@ import React,{useEffect, useState} from 'react'
 import ReactDOM from "react-dom"
 import UploadAudio from "../components/upload_audio"
 import DropdownMenu from '../components/custom_dropdown'
+import EditImage from '../components/editImage'
 import {MoveUp,FileAudio2}from "lucide-react"
 import { title } from 'process'
 export const dummyMenuItems= [
@@ -62,12 +63,10 @@ export default function add_new_song() {
         <section className='absolute top-10 left-10 right-10  text-white bg-gray-400'>
 
         <section className=" rounded-md shadow-2xl  p-6 flex items-center space-x-6 ">
-          {/* Cover image */}
-          <div className="w-40 h-40 bg-gray-200 flex items-center justify-center drop-shadow-2xl shadow-blue-500">
-            <span className="text-4xl text-gray-400">🎵</span>
-          </div>
+
+           <EditImage imageSrc={coverImg} setImageSrc={setCoverImg}/>
       
-          {/* Playlist Info */}
+
           <div className="flex flex-col justify-center">
             <p className="uppercase text-sm font-semibold text-gray-600 mb-1">Public Playlist</p>
             <h1 className="text-5xl font-extrabold  mb-2">My Song #2</h1>

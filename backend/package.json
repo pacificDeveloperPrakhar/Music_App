@@ -5,13 +5,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "run-workers":"ts-node-dev --respawn --transpile-only ./src/workers/file_manager.ts"
+    "run-workers": "ts-node-dev --respawn --transpile-only ./src/workers/file_manager.ts"
   },
   "author": "prakhar vishwakarma",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/cookie-parser": "^1.4.9",
     "connect-pg-simple": "^10.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.3",

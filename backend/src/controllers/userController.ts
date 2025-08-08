@@ -90,10 +90,12 @@ export const googleStrategyController = async function (
 //   }
 // }
 export const issueToken =catchAsync(async function(req:Request,res:Response,next:NextFunction){
+  console.log(req.session)
   const {email,id}=req.user
+
   const token=jwt.sign({email,id},process.env.private_key,{expiresIn:'1h'}) 
   res.setHeader("Authorization",`Bearer ${token}`)
-  res.cookie('jwt',token,{
+  res.cookie('Authorization',token,{
     httpOnly: false, 
       secure: false, 
       sameSite: 'strict', 

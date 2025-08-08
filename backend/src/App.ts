@@ -6,6 +6,8 @@ import passport from "passport";
 import cors from "cors"
 import { Vibrant } from "node-vibrant/node";
 import audioRoutes from "./routes/audioRoutes"
+import playlistRoutes from "./routes/playlistRoutes"
+import cookieParser from "cookie-parser";
 import pg from "pg";
 import path from "path";
 import dotenv from "dotenv";
@@ -13,6 +15,8 @@ import artistRoutes from "./routes/artistRoutes";
 import {client} from "./db/redisConnection"
 import userRoutes from "./routes/userRoutes";
 import error_handler from "./controllers/error_handler";
+import { authenticateRequest } from "./controllers/authController";
+import {issueToken} from "./controllers/userController"
 import { googleStartegyController } from "./controllers/userController";
 
 dotenv.config();
@@ -28,6 +32,7 @@ app.use(cors({
     credentials: true ,
     optionsSuccessStatus:200
   }));
+app.use(cookieParser())
 // PostgreSQL session store
 const PgSession = connectPgSimple(session);
 const pgPool = new pg.Pool({
@@ -108,7 +113,11 @@ app.get("/dashboard", (req:Request, res:Response) => {
 app.use("/users", userRoutes);
 app.use("/artist", artistRoutes);
 app.use("/audio",audioRoutes)
+app.use("/playlist",playlistRoutes)
 app.use("/content",express.static("../public"))
-
+app.use("/authenticate",authenticateRequest,(req,res,next)=>{
+  console.log(req.user)
+})
+app.use("/issue",issueToken)
 
 app.use(error_handler);

@@ -1,6 +1,7 @@
-import express,{type Request,type Response,type NextFunction} from "express"
-import { addArtist, getAllArtists, getArtist, updateArtist } from "../controllers/artistController"
+import express from "express"
+import { addPlayList, deletePlaylist, getAllPlaylist, getPlaylistById, updatePlaylist } from "../controllers/playlistController"
+import { authenticateRequest } from "../controllers/authController"
 const route=express.Router()
-route.route("/:id").get(getArtist).put(updateArtist)
-route.route("/").get(getAllArtists).post(addArtist)
+route.route("/:id").get(getPlaylistById).put(updatePlaylist).delete(deletePlaylist)
+route.route("/").get(getAllPlaylist).post(authenticateRequest,addPlayList)
 export default route

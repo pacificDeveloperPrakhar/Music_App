@@ -24,6 +24,7 @@ export const audio = pgTable("audio", {
   support_hls: boolean("support_hls").notNull().default(false),
   hls_bitrate_src: text("bitrate_src").default(""),
   src: text("src"),
+  theme:varchar("theme").default(""),
   uploadAt: timestamp("upload_at", { withTimezone: true }).defaultNow().notNull(),
   modifiedAt: timestamp("modified_at", { withTimezone: true }).defaultNow().notNull(),
   color_theme: text("color_theme").default("#ffcc33"),
@@ -43,6 +44,7 @@ export const user = pgTable("user", {
   profile_images: jsonb("profile_images").default(sql`'[]'::jsonb`), // array of image objects
   external_urls: jsonb("external_urls").default(sql`'{}'::jsonb`), 
   href: text("href"),
+  theme:varchar("theme").default(""),
   uri: text("uri"),
   permission:permissons("permisson").default("user"),
   is_verified: boolean("is_verified").default(false),
@@ -70,6 +72,7 @@ export const album = pgTable("album", {
   total_tracks: numeric("total_tracks").default("0"),
   album_type: varchar("album_type", { length: 50 }), // e.g., album, single, compilation
   image: text("image"),
+  theme:varchar("theme").default(""),
   artist_id: text("artist_id").references(() => artist.id).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -117,7 +120,12 @@ export const userFollowingArtists = pgTable("user_following_artists", {
   artistId: varchar("artist_id").notNull().references(() => artist.id),
   followedAt: timestamp("followed_at").default(sql`CURRENT_TIMESTAMP`),
 });
-
+export const artistSongs=pgTable("artistSong", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  artistId: varchar("artist_id").notNull().references(() => artist.id),
+  audioId: varchar("audio_id").notNull().references(() => audio.id),
+  createdAt: timestamp("createdAt").default(sql`CURRENT_TIMESTAMP`),
+});
 // this is the user playlist relation based on the fact which playlist is followed by whom
 export const userFollowingPlaylists = pgTable("user_following_playlists", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -167,7 +175,10 @@ export const insertUserRecentlyPlayedSchema = createInsertSchema(userRecentlyPla
   id: true,
   playedAt: true,
 });
-
+export const insertArtistSongSchema=createInsertSchema(artistSongs).omit({
+  id:true,
+  createdAt:true
+})
 export const insertUserFollowingArtistSchema = createInsertSchema(userFollowingArtists).omit({
   id: true,
   followedAt: true,

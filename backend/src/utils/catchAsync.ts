@@ -5,7 +5,7 @@ interface CustomError extends Error {
 }
 
 export default function asyncHandler(
-  func: (req: Request, res: Response, next: NextFunction) => Promise<void>
+  func: (req: Request, res: Response, next: NextFunction) => Promise<void|Response>
 ) {
   return async function (req: Request, res: Response, next: NextFunction) {
     try {
