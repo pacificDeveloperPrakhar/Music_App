@@ -4,7 +4,12 @@ import PlaylistViewSection from './PlaylistViewSection'
 import CreatePlaylist from "../modals/create_playlist"
 import AddSong from "../modals/add_new_song"
 import DropdownMenu from './dropdown'
-export default function Playlist() {
+export default function Playlist({
+  searchParams,
+}: {
+  searchParams?: Record<string, string>;
+}) {
+
   return (
     <section className="min-h-full flex-col  flex-1/4  bg-amber-600 playlist_panel">
 <div className="flex items-center justify-between px-4 py-2">
@@ -40,8 +45,8 @@ export default function Playlist() {
 
   {/* now the playlist and artist preview section */}
   <PlaylistViewSection/>
-  <AddSong/>
-  <CreatePlaylist/>
+  {searchParams?.open_add_song&&<AddSong/>}
+  <CreatePlaylist />
    </section>
   )
 }

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import Link from"next/link"
 import { FaMusic, FaUsers, FaFolder } from 'react-icons/fa';
 import {Plus,ListPlus} from "lucide-react"
 export default function DropdownMenu() {
@@ -20,6 +21,7 @@ export default function DropdownMenu() {
       icon: <ListPlus />,
       title: 'Add Song',
       subtitle: 'Add new song to the database',
+      link:"/?open_add_song=true"
     },
   ];
 
@@ -43,10 +45,12 @@ export default function DropdownMenu() {
               }`}
             >
               <div className="bg-neutral-800 rounded-full p-2">{item.icon}</div>
+              <Link href={`${item.link}`}>
               <div>
                 <h3 className="text-sm font-semibold">{item.title}</h3>
                 <p className="text-xs text-gray-400">{item.subtitle}</p>
               </div>
+              </Link>
             </div>
           ))}
         </div>

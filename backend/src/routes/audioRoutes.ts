@@ -5,5 +5,8 @@ import { uploadAudio } from "../utils/multerConfig"
 const route=express.Router()
 // get audio has to be checked for the functinality
 route.route("/:id").get(getAudio).put((req,res)=>{})
-route.route("/").get((req,res)=>{}).post(uploadAudio.single("audio"),addAudio)
+route.route("/").get((req,res)=>{}).post((req,res,next)=>{
+    console.log("my text is here")
+    next()
+},uploadAudio.single("audio"),addAudio)
 export default route

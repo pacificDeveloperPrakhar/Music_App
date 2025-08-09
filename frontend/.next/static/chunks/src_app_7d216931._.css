@@ -1,0 +1,68 @@
+/* [project]/src/app/style.css [app-client] (css) */
+.main_portion {
+  background-color: #000;
+  display: flex;
+}
+
+.main_portion div {
+  border-radius: .2rem;
+  margin: .2rem;
+}
+
+.playlist_panel div h1 {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.playlist_panel div h1 .list_collapse {
+  opacity: 0;
+  width: 2rem;
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1), opacity .3s cubic-bezier(.4, 0, .2, 1);
+  transform: translateX(0);
+}
+
+.playlist_panel div h1 span {
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.playlist_panel:hover div h1 .list_collapse {
+  opacity: 1;
+  margin-right: 0;
+  transform: translateX(0);
+}
+
+.playlist_panel:hover div h1 span {
+  transform: translateX(1rem);
+}
+
+
+/* [project]/src/app/components/custom_drop_down.css [app-client] (css) */
+.dropdown {
+  max-height: 20vh;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: none;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 8px;
+}
+
+.dropdown {
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 transparent;
+}
+
+
+/* [project]/src/app/components/EditImage.css [app-client] (css) */
+
+
+
+/*# sourceMappingURL=src_app_7d216931._.css.map*/

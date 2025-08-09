@@ -9,8 +9,8 @@ import {parseFile} from "music-metadata"
 import {client} from "../db/redisConnection"
 export const addAudio=catchAsync(async function(req:Request,res:Response,next:NextFunction){
   const {name,preview,type,lyrics}=req.body
-  const {path}=req.file
   console.log(req.file)
+  const {path}=req.file
   const metadata=await parseFile(path)
   const duration_ms=metadata.format.duration
   const audio_doc:audioType[]=await db.select().from(audio).where(eq(audio.name,name))

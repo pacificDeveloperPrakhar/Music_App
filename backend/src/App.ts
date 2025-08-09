@@ -26,7 +26,7 @@ let sequence_count = 1;
 export const app = express();
 // setting up the cors
 app.use(cors({
-    origin: ['http://127.0.0.1:3000','http://127.0.0.1:1234'],  // i have changed it to allow it to accept request from one specific source only
+    origin: ['http://127.0.0.1:3000','http://localhost:3001'],  // i have changed it to allow it to accept request from one specific source only
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  
     allowedHeaders: ['Content-Type', 'Authorization'],  
     credentials: true ,

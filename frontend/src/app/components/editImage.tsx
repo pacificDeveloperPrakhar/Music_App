@@ -12,19 +12,41 @@ export default function EditImage({setImageSrc,imageSrc}) {
     if (!showModal) return;
 
     const handlePaste = (event) => {
-      const items = event.clipboardData?.items;
-      if (items) {
-        for (let item of items) {
-          if (item.type.startsWith("image/")) {
-            const file = item.getAsFile();
-            const url = URL.createObjectURL(file);
-            setImageSrc(url);
-            setShowModal(false); 
-          }
-        }
+      // First, check if clipboard contains text
+      const text = event.clipboardData?.getData("text");
+      if (text && /^https?:\/\//.test(text)) {
+        setImageSrc(text); // original URL
+        setShowModal(false);
+        return;
       }
-    };
+    
+      // Otherwise, handle image file
+const items = event.clipboardData?.items;
+if (items) {
+  for (let item of items) {
+    if (item.type.startsWith("image/")) {
+      const file = item.getAsFile();
 
+      if (file) {
+        // Store the File object so you can upload it later
+
+
+        // If you want a preview in the UI
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImageSrc(reader.result); // Base64 preview
+        };
+        reader.readAsDataURL(file);
+
+        // Close modal
+        setShowModal(false);
+      }
+    }
+  }
+}
+
+    };
+    
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setShowModal(false);

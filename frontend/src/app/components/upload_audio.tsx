@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export default function MusicUploadPreview() {
-  const [music, setMusic] = useState<File | null>(null);
+export default function MusicUploadPreview({music,setMusic}) {
+
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {

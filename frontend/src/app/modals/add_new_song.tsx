@@ -4,6 +4,9 @@ import ReactDOM from "react-dom"
 import UploadAudio from "../components/upload_audio"
 import DropdownMenu from '../components/custom_dropdown'
 import EditImage from '../components/editImage'
+import EditableText from '../components/editTitle'
+import Link from"next/link"
+import axiosInstance, { axiosInstanceForMultipart } from '../axiosConfig'
 import {MoveUp,FileAudio2}from "lucide-react"
 import { title } from 'process'
 export const dummyMenuItems= [
@@ -49,7 +52,11 @@ const dummyBitrate=[{
 }]
 export default function add_new_song() {
   const [element,setElement]=useState<HTMLElement|null>(null)
-  const [coverImg,setCoverImg]=useState<File|null>(null)
+  const [coverImg,setCoverImg]=useState(null)
+  const [audioFile,setAudioFile]=useState<File|null>(null)
+  const [title,setTitle]=useState("My Song #2")
+  const [lyrics,setLyrics]=useState(null)
+  const [type,setType]=useState("song")
   useEffect(function(){
     setElement(document.getElementById("music_body"))
 
@@ -69,12 +76,9 @@ export default function add_new_song() {
 
           <div className="flex flex-col justify-center">
             <p className="uppercase text-sm font-semibold text-gray-600 mb-1">Public Playlist</p>
-            <h1 className="text-5xl font-extrabold  mb-2">My Song #2</h1>
+             <EditableText text={title} setText={setTitle}/>
             <p className="text-gray-700 font-medium">Prakhar Vishwakarma</p>
           </div>
-        </section>
-        <section>
-          <input type="file" />
         </section>
         <section className='flex'>
          <div className='flex-1'>
@@ -84,17 +88,42 @@ export default function add_new_song() {
           <DropdownMenu menuItems={dummyBitrate} DropMenuButton={FileAudio2 }/>
          </div>
          <div className='flex-1 bg-green-200'>
-          <UploadAudio/>
+          <UploadAudio music={audioFile} setMusic={setAudioFile}/>
          </div>
-         <select className="p-2 border rounded" onChange={(e) => console.log(e.target.value)}>
-  <option value="">Select an option</option>
-  <option value="rock">Rock</option>
-  <option value="pop">Pop</option>
-  <option value="jazz">Jazz</option>
+         <div><input type="text" onChange={(e)=>setType(e.target.value)}/></div>
+         <select className="p-2 border rounded" onChange={(e) => setType(e.target.value)}>
+  <option value="song">song</option>
+  <option value="podcast">podcast</option>
 </select>
         </section>
         </section>
-      
+        <button
+  onClick={async() => {
+    // Create FormData instance
+    const formData = new FormData();
+    if(audioFile)
+      formData.append("audio",audioFile)
+    // Append all state data
+    if (coverImg) {
+      formData.append("preview", coverImg); // file
+    }
+    formData.append("name", title);         // string
+    if (lyrics) {
+      formData.append("lyrics", lyrics);     // could be string or file
+    }
+    formData.append("type", type);           // "song" or "podcast"
+
+    // Just to verify what's inside
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+   await axiosInstanceForMultipart.post("/audio",formData)
+  }}
+>
+  Upload
+</button>
+<Link href="/">close the modal</Link>
+
       </div>
       
         ,element

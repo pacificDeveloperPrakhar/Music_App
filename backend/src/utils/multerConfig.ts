@@ -48,7 +48,8 @@ export const storage=multer.diskStorage({
         'audio/wav',        // .wav
         'audio/ogg',        // .ogg
         'audio/webm',       // .webm
-        'audio/mp4',        // .m4a, .mp4
+        'audio/mp4',
+        'audio/mp3',        // .m4a, .mp4
         'audio/x-aac',      // .aac
         'audio/flac',       // .flac
         'audio/x-wav',      // some .wav files
